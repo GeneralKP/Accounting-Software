@@ -26,6 +26,8 @@ public class Main {
 			Depreciacion.depreciacion(entrada);
 
 		} else if (OpP == 3) {
+			
+			Deterioro.deterioroCartera(entrada);
 
 		} else if (OpP == 4) {
 
@@ -42,254 +44,52 @@ public class Main {
 	}
 
 }
-
-
 package com.edu.finalpoo.grupo;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
-public class Depreciacion {
+public class Main {
 
-	public static void depreciacion(Scanner entrada) {
+	public static void main(String[] args) {
 
-		System.out.println("Muy buenas señor usuario \nBienvenido al software de depreciación \n"
-				+ "Digite :\n		1 - Método depreciación lineal \n"
-				+ "		2 - Método depreciación suma de dígitos");
+		// Bienvenida y despliegue de menúes
+		System.out.println("Buenas señor usuario, digite la opción");
+		System.out.println("1-Libro diario");
+		System.out.println("2-Depreciación");
+		System.out.println("3-Deterioro de cartera");
+		System.out.println("4-Inventario");
+		System.out.println("5-Estado de resultados");
+		System.out.println("6-Balance general");
+		// Creación de la variable de la opcion principal OpP
+		Scanner entrada = new Scanner(System.in);
 
-		// Creación de variable de seleección de método para hacer la depreciación
-		Integer Opcion;
-		Integer OpMe = entrada.nextInt();
-		// If que determina el método
-		if (OpMe == 1) {
+		Integer OpP = entrada.nextInt();
 
-			// Método lineal
+		if (OpP == 1) {
 
-			int o;
-			do {
+		} else if (OpP == 2) {
+			
+			Depreciacion.depreciacion(entrada);
 
-				depLineal(entrada);
+		} else if (OpP == 3) {
+			
+			Deterioro.deterioroCartera(entrada);
 
-				o = entrada.nextInt();
+		} else if (OpP == 4) {
 
-			} while (o == 1);
+		} else if (OpP == 5) {
 
-		} else if (OpMe == 2) {
+		} else if (OpP == 6) {
 
-			// Método Acumulado
-
-			// Creación de variables de los valores del activo
-			do {
-
-				depAcum(entrada);
-
-				Opcion = entrada.nextInt();
-			} while (Opcion == 1);
-
-		} else {
-
-			// El usuario no escogió una opción válida y el programa crashea
-			System.out.println("ERROR 404\n" + "Señor usuario, digite una opción válida\n" + "Reinicie el programa");
+		} else if (OpP == 7) {
 
 		}
+		
+		entrada.close();
+
 	}
 
-	public static void depLineal(Scanner entrada) {
-
-		System.out.println("Señor usuario, digite el valor del activo");
-		Float ValAc = (float) entrada.nextInt();
-
-		System.out.println("Señor usuario, digite el valor de las adiciones al activo");
-		Float Adiciones = (float) entrada.nextInt();
-
-		Float ValBien = ValAc + Adiciones;
-
-		System.out.println("Señor usuario, digite el valor de rescaste");
-
-		Float ValRescat = (float) entrada.nextInt();
-
-		double ValDepre = ValAc - ValRescat;
-
-		System.out.println("Señor usuario, digite la vida util del activo en aÃ±os");
-		Integer VU = entrada.nextInt();
-
-		System.out.println("Costo del bien: $ " + ValBien);
-
-		double VD = ValDepre / VU;
-		System.out.println("valor depreciable de un aÃ±o " + VD);
-
-		System.out.println("Señor usuario, digite \n 1 si desea el valor depreciable acumulado en aÃ±os"
-				+ " \n 2 si desea el valor depreciable acumulado en meses");
-		double Tot;
-
-		if (entrada.nextInt() == 1) {
-
-			System.out.println("Señor usuario, digite la cantidad de aÃ±os acumulados que desea ver ");
-			Integer a = entrada.nextInt();
-			if (a <= VU) {
-
-				Tot = VD * a;
-				System.out.println("El valor depreciable acumulado en " + a + " años es " + Tot);
-
-			} else {
-				System.out.println("Error \n Señor usuario,la cantidad de aÃ±os es mayor que la vida util  ");
-
-			}
-		} else {
-
-			double VDm = VD / 12;
-			System.out.println("Señor usuario, digite la cantidad de meses acumulados que desea ver");
-			Integer m = entrada.nextInt();
-			Tot = VDm * m;
-
-			System.out.println("el valor depreciable acumulado en " + m + " meses es " + Tot);
-
-		}
-		System.out.println("\n Asiento de Registro \n");
-
-		System.out.println("codigo        debito       credito ");
-		System.out.println("5160/5260 " + VD);
-		System.out.println("1592 Dep Acumulada         " + VD);
-		System.out.println("Registro.Depre aÃ±o 1 \n");
-
-		System.out
-				.println("Si desea volver a usar el método de depreciación lineal, digite 1 de lo contrario digite 2 ");
 }
-
-
-
-	public static void depAcum(Scanner entrada) {
-		System.out.println("Señor usuario, digite el valor del activo");
-		Float VaAc = (float) entrada.nextInt();
-
-		System.out.println("Señor usuario, digite las adiciones del activo");
-		Float Adiciones = (float) entrada.nextInt();
-
-		System.out.println("Señor usuario, digite el valor de rescate");
-		Float ValRescat = (float) entrada.nextInt();
-
-		Float ValBien = VaAc + Adiciones;
-
-		Float ValDepre = ValBien - ValRescat;
-
-		// Variable de años
-		System.out.println("Señor usuario, por favor, digite el número de años de vida útil del bien");
-		Integer VU = entrada.nextInt();
-
-		// Lista de los años de vida util
-		List<Integer> ListaAgnos = new ArrayList<Integer>();
-
-		for (Integer i = 0; (i - 1) < VU; i++) {
-			ListaAgnos.add(i);
-		}
-
-		// Creación del FACTOR TOTAL
-
-		Integer FacTot = 0;
-
-		for (Integer i = VU; i > 0; i--) {
-			FacTot = FacTot + i;
-		}
-
-		Float NumCrack;
-
-		ListaAgnos.remove(0);
-
-		// Creación lista Detalle/Factor TEMPORAL
-
-		List<Float> ListaVainaTemp = new ArrayList<Float>();
-
-		for (Integer e : ListaAgnos) {
-			NumCrack = (float) e / FacTot;
-			ListaVainaTemp.add(NumCrack);
-		}
-
-		// Creación lista Detalle/Factor VERDADERA
-
-		List<Float> ListaVaina = new ArrayList<Float>();
-
-		for (Integer i = (VU - 1); i > -1; i--) {
-			ListaVaina.add(ListaVainaTemp.get(i));
-		}
-
-		// Creación Lista GastoDepreciación
-
-		List<Float> ListaGastDep = new ArrayList<Float>();
-
-		for (Float r : ListaVaina) {
-			ListaGastDep.add(r * ValDepre);
-		}
-
-		// Creación de lista Depreciación acumulada
-
-		List<Float> ListaDepAcum = new ArrayList<Float>();
-		Float cont = 0.0f;
-
-		for (Float h : ListaGastDep) {
-			cont = cont + h;
-			ListaDepAcum.add(cont);
-		}
-
-		// Creación de lista Valor Depreciable
-
-		List<Float> ListaValDep = new ArrayList<Float>();
-
-		ListaValDep.add(4000000.0f);
-		for (Float h : ListaDepAcum) {
-			ListaValDep.add(ValDepre - h);
-		}
-
-		// Impresión de todos los datos
-
-		System.out.println("Los valores son los siguientes: " + "Valor Depreciable: " + ListaValDep.get(0));
-
-		System.out.println(
-				"Años   Detalle/Factor    Gasto Depreciación     Depreciación Acumulada      Valor Depreciable");
-
-		for (Integer i = 0; i < VU; i++) {
-			System.out.println((i + 1) + "       " + ListaVaina.get(i) + "                   " + ListaGastDep.get(i)
-					+ "         " + ListaDepAcum.get(i) + "          " + ListaValDep.get(i + 1));
-		}
-
-		// Menú de selección final
-		Integer rep = 0;
-		do {
-			System.out.println("Señor usuario, digite el año del cual usted quiera tener información");
-			Integer info = entrada.nextInt();
-
-			while (info > VU) {
-				System.out.println("ERROR 404\n" + "Señor usuario, digite una opción válida");
-				info = entrada.nextInt();
-			}
-
-			System.out.println("\n1-Gasto Depreciación\n2-Depreciación Acumulada\n3-Valor Depreciable");
-			Integer OpFin = entrada.nextInt();
-
-			if (OpFin == 1) {
-				System.out.println(
-						"El valor de 'Gasto Depreciación' del año " + info + " es: " + ListaGastDep.get((info - 1)));
-			} else if (OpFin == 2) {
-				System.out.println("El valor de 'Depreciación acumulada' del año " + info + " es: "
-						+ ListaDepAcum.get((info - 1)));
-			} else if (OpFin == 3) {
-				System.out
-						.println("El valor de 'Valor depreciable' del año " + info + " es: " + ListaValDep.get((info)));
-			} else {
-				System.out
-						.println("ERROR 404\n" + "Señor usuario, digite una opción válida\n" + "Reinicie el programa");
-			}
-
-			System.out.println("Señor usuario, digite 1 si desea seleccionar otro número, de lo contrario, digite 2");
-			rep = entrada.nextInt();
-		} while (rep == 1);
-
-		System.out.println("si desea volver a usar el programa digite 1 de lo contrario digite 2 ");
-
-		System.out.println("Gracias por usar el software. Feliz dia. Sos el mejor, profe");
-	}
-}
-
 package com.edu.finalpoo.grupo;
 
 import java.util.Map;
