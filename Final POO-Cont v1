@@ -140,3 +140,122 @@ public class Cuentas {
 		cuentas.put(6135, "comercio al por mayor y por menor (venta)");
 	}// Fin de mapa de las cuentas
 }
+
+package com.edu.finalpoo.grupo;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Inventario {
+
+	public static void inventario(Scanner entrada) {
+
+		System.out.println("Bienvenido al apartado de invenario\nDigite:\n1-Método PEPS\n2-Método Promedio Ponderado");
+
+		// Creación de variable de selección del método de inventario
+
+		Integer OpMetInv = entrada.nextInt();
+
+		while (OpMetInv != 1 || OpMetInv != 2) {
+			System.out.println("El número digitado no es válido\nPor favor, digite una opción acertada");
+			OpMetInv = entrada.nextInt();
+		}
+
+		// Condicional de selección de método
+		if (OpMetInv == 1) {
+			// Método PEPS
+
+		} else if (OpMetInv == 2) {
+			// Método Promedio Ponderado
+
+		}
+	}
+
+	public static void metodoPeps(Scanner entrada) {// Método PEPS
+
+		// Variable que determina si se sigue efectuando el ciclo que hace una compra,
+		// una venta o muestra el saldo
+		Integer meterDatos = 1;
+		// Variable de selección del condicional para hacer una compra, una venta o
+		// mostrar el saldo
+		Integer hacer;
+		
+		//Lista de unidades que entran
+		List<Integer> lista_unidades_entrada = new ArrayList<>();
+		//Lista de valores de acuerdo al número de unidades que entran
+		List<Integer> lista_valor_total_entrada = new ArrayList<>();
+		//Lista de costos de las unidades que entran
+		List<Integer> lista_valor_unitario_entrada = new ArrayList<>();
+		
+		//Lista de unidades que salen
+		List<Integer> lista_unidades_salida = new ArrayList<>();
+		//Lista de valores de acuerdo al número de unidades que salen
+		List<Integer> lista_valores_total_salida = new ArrayList<>();
+		//Lista de costos de las unidades que salen
+		List<Integer> lista_valor_unitario_salida = new ArrayList<>();
+		
+		//Lista de unidades en los saldos
+		List<Integer> lista_unidades_saldos = new ArrayList<>();
+		//Lista de valores de acuerdo al número de unidades de los saldos
+		List<Integer> lista_valor_total_saldos = new ArrayList<>();
+		//Lista de costos de las unidades que se registran en saldos
+		List<Integer> lista_valor_unitario_saldos = new ArrayList<>();
+		
+		System.out.println("Digite el saldo inicial");
+		lista_unidades_saldos.add(entrada.nextInt());
+
+		System.out.println("Digite el valor unitario de las unidades");
+		
+		
+		Integer n=0; //Contador de índices
+		while (meterDatos == 1) {
+
+			System.out.println("Señor usuario, digite de acuerdo a lo que quiere hacer\n"
+					+ "1-Entrada de unidades(Compra)\n2-Salida de unidades(Venta)\n3-Mostrar saldo actual");
+			hacer = entrada.nextInt();
+
+			if (hacer == 1) {
+				// Entrada de unidades y registro en saldos
+				System.out.println("Digite el número de unidades que van a entrar");
+				lista_unidades_entrada.add(entrada.nextInt());
+				lista_unidades_saldos.add(entrada.nextInt());
+				
+				System.out.println("Digite el valor unitario de las unidades que van a entrar");
+				lista_valor_unitario_saldos.add(entrada.nextInt());
+				
+				// Entrada de costo total de las undades y registro en saldos
+				lista_valor_total_entrada.add(lista_unidades_entrada.get(n)*lista_valor_unitario_entrada.get(n));
+				lista_valor_total_saldos.add(entrada.nextInt());
+				
+				n=n+1;
+				
+			} else if (hacer == 2) {
+				// Salida de unidades
+				System.out.println("Digite el número de unidades que van a salir");
+				lista_unidades_salida.add(entrada.nextInt());	
+				
+				System.out.println("Digite el valor unitario de las unidades que van a salir");
+				lista_valor_unitario_salida.add(entrada.nextInt());
+				
+				lista_valores_total_salida.add(lista_unidades_salida.get(n)*lista_valor_unitario_salida.get(n));
+				
+				for(Integer e: lista_unidades_saldos){
+										
+				}
+				
+				n=n+1;
+
+			} else if (hacer == 3) {
+				// Mostrar saldo actual
+
+			}
+		}
+
+	}// Fin método PEPS
+
+	public static void metodoProm(Scanner entrada) {// Método Promedio
+
+	}// Fin método Promedio
+
+}
